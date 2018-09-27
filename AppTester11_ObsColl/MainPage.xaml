@@ -2,13 +2,51 @@
     x:Class="AppTester11_ObsColl.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:AppTester11_ObsColl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"   
+    xmlns:m="using:Models" 
+    xmlns:vm="using:ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <m:Content x:Key="Content"/>
+        <vm:VM_Base_ObsColl x:Key="VM_Base_ObsColl"/>
+    </Page.Resources>
+    <StackPanel>
+        <TextBox Text="ObservableCollection&lt;T&gt;" HorizontalAlignment="Center"/>
+        <StackPanel Background="Gray"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center" 
+                    Width="340" Height="245" Margin="5 5 0 10">
+            <TextBlock HorizontalAlignment="Center"
+                Text="&lt;Collection&gt; Add Coll Items"/>
+            <Button Name="btnAdd" Margin="5 5"
+                    Command="{Binding Path=Cmd_ADDModelPropsList,
+                    Source={StaticResource VM_Base_ObsColl}}"
+                    CommandParameter="{Binding}">Add</Button>
+            <ListBox DataContext="{Binding Source={StaticResource VM_Base_ObsColl}}"
+                     Name="myAddListBox" Height="140" Width="330"
+                     SelectionMode="Multiple" Margin="5 5"
+                     ItemsSource="{Binding VM_Base_ObsColl}"/>
+        </StackPanel>
+        <StackPanel Background="DarkGray"                 
+                    Width="340" VerticalAlignment="Center"
+                    HorizontalAlignment="Center" Margin="5 0 5 5">
+            <TextBlock HorizontalAlignment="Center"
+                Text="&lt;Collection&gt; Remove Items"/>
 
-    <Grid>
+            <Button Name="btnClassRemove" Margin="5 5"
+                    Command="{Binding Path=Cmd_RemoveModPropsList,
+                    Source={StaticResource VM_Base_ObsColl}}"
+                    CommandParameter="{Binding}">Remove Coll Items</Button>
 
-    </Grid>
+            <ListBox DataContext="{Binding Source={StaticResource VM_Base_ObsColl}}"
+                Name="myRemoveListBox"    
+                     
+                     ItemsSource="{Binding SelectedTitle}"
+                     SelectionMode="Multiple" 
+                     Height="160" Width="330"
+                     Margin="5 5"/>
+        </StackPanel>
+    </StackPanel>
 </Page>
