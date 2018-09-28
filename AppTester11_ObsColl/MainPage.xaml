@@ -10,26 +10,65 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <m:Content x:Key="Content"/>
-        <vm:VM_Base_ObsColl x:Key="VM_Base_ObsColl"/>
+        <vm:VM_Content x:Key="VM_Content"/>
     </Page.Resources>
     <StackPanel>
         <TextBox Text="ObservableCollection&lt;T&gt;" HorizontalAlignment="Center"/>
-        <StackPanel Background="Gray"
+        <StackPanel Background="LightGray"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Center" 
                     Width="340" Height="245" Margin="5 5 0 10">
-            <TextBlock HorizontalAlignment="Center"
+            <!--<TextBlock HorizontalAlignment="Center"
                 Text="&lt;Collection&gt; Add Coll Items"/>
             <Button Name="btnAdd" Margin="5 5"
+                   
                     Command="{Binding Path=Cmd_ADDModelPropsList,
                     Source={StaticResource VM_Base_ObsColl}}"
-                    CommandParameter="{Binding}">Add</Button>
-            <ListBox DataContext="{Binding Source={StaticResource VM_Base_ObsColl}}"
+                    CommandParameter="{Binding}">Add</Button>-->
+
+            <ListView x:Name="MyList" Header="Contents"
+               HorizontalAlignment="Left" 
+               Height="225"
+               Width="330"
+               VerticalAlignment="Top"
+               Margin="5 10"
+               ItemsSource="{Binding Contents, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="MyDataTemplate">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="TbxblListItem" Text="{Binding Title}"/>
+                            <Button Command="{Binding DataContext.DeleteContentCommand, ElementName=MyList}" 
+                                CommandParameter="{Binding}">
+                                <SymbolIcon Symbol="Delete" 
+                                    ToolTipService.ToolTip="Delete Content" 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <TextBox x:Name="TbxNoteContent" HorizontalAlignment="Left"
+             Margin="10 5"
+             TextWrapping="Wrap"
+             VerticalAlignment="Top"
+             Width="376"/>
+
+            <Button Content="Add"
+            HorizontalAlignment="Left"
+            Margin="10 10"
+            VerticalAlignment="Top"
+            Command="{Binding AddTitleCommand}"
+            CommandParameter="{Binding Text, ElementName=TbxTitleContent}"/>
+
+            <!--<ListBox DataContext="{Binding Source={StaticResource VM_Base_ObsColl}}"
                      Name="myAddListBox" Height="140" Width="330"
                      SelectionMode="Multiple" Margin="5 5"
-                     ItemsSource="{Binding VM_Base_ObsColl}"/>
+                     ItemsSource="{Binding VM_Base_ObsColl}"/>-->
         </StackPanel>
-        <StackPanel Background="DarkGray"                 
+        <!--<StackPanel Background="DarkGray"                 
                     Width="340" VerticalAlignment="Center"
                     HorizontalAlignment="Center" Margin="5 0 5 5">
             <TextBlock HorizontalAlignment="Center"
@@ -47,6 +86,6 @@
                      SelectionMode="Multiple" 
                      Height="160" Width="330"
                      Margin="5 5"/>
-        </StackPanel>
+        </StackPanel>-->
     </StackPanel>
 </Page>

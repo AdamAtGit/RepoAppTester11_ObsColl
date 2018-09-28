@@ -99,10 +99,14 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Content.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Commands\Cmd_ADDModelPropsList.cs" />
     <Compile Include="ViewModels\Commands\Cmd_RemoveColl_Items.cs" />
+    <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\RelayCommandSimple.cs" />
     <Compile Include="ViewModels\VM_Base_ObsColl.cs" />
+    <Compile Include="ViewModels\VM_Content.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
