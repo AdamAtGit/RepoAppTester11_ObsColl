@@ -34,11 +34,9 @@ namespace ViewModels
             _execute = execute;
             _canExecute = canExecute;
         }
-
         #endregion
 
         #region ICommand Members
-
         public bool CanExecute(object parameter)
         {
             return _canExecute == null ? true : _canExecute((T)parameter);
@@ -53,12 +51,10 @@ namespace ViewModels
                 CanExecuteChanged(this, new EventArgs());
         }
 
-
         public void Execute(object parameter)
         {
             _execute((T)parameter);
         }
-
         #endregion
     }
 }

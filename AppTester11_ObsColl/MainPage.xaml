@@ -9,15 +9,16 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
-        <m:Content x:Key="Content"/>
+        <!--<m:Content x:Key="Content"/>-->
         <vm:VM_Content x:Key="VM_Content"/>
     </Page.Resources>
+
     <StackPanel>
         <TextBox Text="ObservableCollection&lt;T&gt;" HorizontalAlignment="Center"/>
         <StackPanel Background="LightGray"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Center" 
-                    Width="340" Height="245" Margin="5 5 0 10">
+                    Width="340" Height="500" Margin="5 5 0 10">
             <!--<TextBlock HorizontalAlignment="Center"
                 Text="&lt;Collection&gt; Add Coll Items"/>
             <Button Name="btnAdd" Margin="5 5"
@@ -27,8 +28,9 @@
                     CommandParameter="{Binding}">Add</Button>-->
 
             <ListView x:Name="MyList" Header="Contents"
+               DataContext="{Binding Source={StaticResource VM_Content}}"
                HorizontalAlignment="Left" 
-               Height="225"
+               Height="200"
                Width="330"
                VerticalAlignment="Top"
                Margin="5 10"
@@ -38,9 +40,20 @@
                     <DataTemplate x:Name="MyDataTemplate">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock x:Name="TbxblListItem" Text="{Binding Title}"/>
-                            <Button Command="{Binding DataContext.DeleteContentCommand, ElementName=MyList}" 
+                            <TextBlock x:Name="TbxblListItem2" Text="{Binding Category}"/>
+                            <Button DataContext="{Binding Source={StaticResource VM_Content}}"
+                                Command="{Binding DataContext.DeleteContentCommand, ElementName=MyList}" 
                                 CommandParameter="{Binding}">
                                 <SymbolIcon Symbol="Delete" 
+                                    ToolTipService.ToolTip="Delete Content" 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"/>
+                            </Button>
+
+                            <Button DataContext="{Binding Source={StaticResource VM_Content}}"
+                               Command="{Binding DataContext.RemoveItems, ElementName=MyList}"
+                                CommandParameter="{Binding}">
+                                <SymbolIcon Symbol="Remove" 
                                     ToolTipService.ToolTip="Delete Content" 
                                     HorizontalAlignment="Center" 
                                     VerticalAlignment="Center"/>
@@ -50,24 +63,50 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <TextBox x:Name="TbxNoteContent" HorizontalAlignment="Left"
+            <TextBox x:Name="TbxContentTitle" 
+             Header="Content Title"
+             HorizontalAlignment="Left"
              Margin="10 5"
              TextWrapping="Wrap"
              VerticalAlignment="Top"
-             Width="376"/>
+             Width="300"/>
+            <TextBox x:Name="TbxContentCategory" 
+             Header="Content Category"
+             HorizontalAlignment="Left"
+             Margin="10 5"
+             TextWrapping="Wrap"
+             VerticalAlignment="Top"
+             Width="300"/>
 
-            <Button Content="Add"
+            <TextBlock           
+             HorizontalAlignment="Left"
+             Margin="10 2"
+             Text="Content Full Info"
+             VerticalAlignment="Top"
+             Width="300"/>
+            <TextBlock x:Name="lblContentFullInfo"  
+                       Text="{Binding ElementName=TbxContentTitle,Path=Text}"
+             HorizontalAlignment="Left"
+             Margin="10 5"
+             TextWrapping="Wrap"
+             VerticalAlignment="Top"
+             Width="300"/>
+
+            <!--DataContext="{Binding Source={StaticResource VM_Content}}"-->
+            <Button Content="Add" 
+            
+            Background="DarkGray"
             HorizontalAlignment="Left"
             Margin="10 10"
             VerticalAlignment="Top"
-            Command="{Binding AddTitleCommand}"
-            CommandParameter="{Binding Text, ElementName=TbxTitleContent}"/>
+            Command="{Binding Source={StaticResource VM_Content}, Path=AddContentCommand}"
+            CommandParameter="{Binding Text, ElementName=TbxContentTitle}"/>
 
             <!--<ListBox DataContext="{Binding Source={StaticResource VM_Base_ObsColl}}"
                      Name="myAddListBox" Height="140" Width="330"
                      SelectionMode="Multiple" Margin="5 5"
-                     ItemsSource="{Binding VM_Base_ObsColl}"/>-->
-        </StackPanel>
+                     ItemsSource="{Binding VM_Base_ObsColl}"/>
+        </StackPanel>-->
         <!--<StackPanel Background="DarkGray"                 
                     Width="340" VerticalAlignment="Center"
                     HorizontalAlignment="Center" Margin="5 0 5 5">
@@ -85,7 +124,7 @@
                      ItemsSource="{Binding SelectedTitle}"
                      SelectionMode="Multiple" 
                      Height="160" Width="330"
-                     Margin="5 5"/>
-        </StackPanel>-->
+                     Margin="5 5"/>-->
+        </StackPanel>
     </StackPanel>
 </Page>

@@ -3,10 +3,10 @@
     public class Content
     {
         #region override string 
-        //public override string ToString()
-        //{
-        //    return Title + " ," +  Category;
-        //}
+        public override string ToString()
+        {
+            return Title + " ," + Category;
+        }
         #endregion
         #region Prop Changed *in Notification.cs Instead
         //public event PropertyChangedEventHandler PropertyChanged;
@@ -14,10 +14,11 @@
         //{
         //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         //}
-#endregion
-        public Content(string title)
+        #endregion
+        public Content(string title,string category)
         {
             Title = title;
+            Category = category;
             #region if/else designMode
             //if (DesignMode.DesignModeEnabled)
             //{
@@ -47,16 +48,15 @@
 
 
         #region Other Class/Model/Record Props & Fields
-        //private string category;
-        //public string Category
-        //{
-        //    get => category;
-        //    set
-        //    {
-        //        category = value;
-        //        OnPropertyChanged("Category");
-        //    }
-        //}
+        private string category;
+        public string Category
+        {
+            get => category;
+            set
+            {
+                category = value;
+            }
+        }
 
 
         //private string mediaType;//Speech,Audio,Video
